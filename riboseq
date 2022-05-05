@@ -1,0 +1,26 @@
+#!/bin/bash
+# script pour analyser les données de ribo-seq
+
+# 1 - ne garder que les lignes correspondant à des UTR (3' ou 5'), et stocker le résultat dans un fichier
+
+exec 7<GSM1047589_C_Tx_alignment_reads_coverage_per_position_bothStrands_SF_0.93_.wig
+exec 8<UTR5
+
+while read -r line <&7
+do
+	# récupérer le numéro du chromosome
+	if [[ $line = *chr* ]]; then
+	  CHROM=$(echo ${line:19:5} | cut -f 1)
+	  printf "Chromosome %s!\n" $CHROM
+	else
+	  if [[ ${line:0:1} != "t" ]]; then
+	    position=$(echo $line | cut -d ' ' -f 1)
+	    valeur=$(echo $line | cut -d ' ' -f 2)
+	    while read -r utrline <&8
+	    do
+	      utrchrom=$(echo $utrline | cut -f 1)
+#	      printf "UTR chrom %s\n" $utrchrom
+	    done # < UTR5
+	  fi
+	fi
+done # < GSM1047589_C_Tx_alignment_reads_coverage_per_position_bothStrands_SF_0.93_.wig
