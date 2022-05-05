@@ -8,6 +8,7 @@ Using the results from this ribosome profiling experiment : https://www.ncbi.nlm
 
 We wanted to know how cellular senescence changes the expression profile of cells regarding translation readthrough, where ribosomes would keep translating through a STOP codon until the next one.
 
+- riboseq : bash script to extract data from wig files
 - wig files : tables associating the number of reads with the position for each chromosome (only the first 50 lines since these files are huge)
 - UTR3, UTR5 files : for each gene, the first and last position of the UnTranslated Region, for the 3' or 5' extremity
 - Short_UTR3.py : script computing, for each gene, the positions of the 3' and 5' UTR, the chromosome number, the strand, and mean and sum values from the riboseq
